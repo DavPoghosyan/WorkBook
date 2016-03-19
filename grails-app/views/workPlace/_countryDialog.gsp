@@ -2,9 +2,9 @@
 <div id="country-info" title="${message(code: 'country.info.label')}">
     <li class="fieldcontain">
         <span id="country-name-label" class="property-label">
-            <g:message code="country.name.label"/>
+            <g:message  id="a" code="country.name.label"/>
         </span>
-        <span class="property-value" aria-labelledby="country-name-label">
+        <span id="rimm-country-name" class="property-value" aria-labelledby="country-name-label">
             <g:fieldValue bean="${country}" field="name"/>
         </span>
     </li>

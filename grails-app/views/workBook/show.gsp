@@ -39,6 +39,16 @@
                 </div>
 			</g:if>
 			<ol class="property-list workBook">
+                <g:if test="${workBookInstance?.firstName}">
+                    <li class="fieldcontain">
+                        <span id="firstName-label" class="property-label">
+                            <g:message code="workBook.firstName.label"/>
+                        </span>
+                        <span class="property-value" aria-labelledby="firstName-label">
+                            <g:fieldValue bean="${workBookInstance}" field="firstName"/>
+                        </span>
+                    </li>
+                </g:if>
 				<g:if test="${workBookInstance?.lastName}">
                     <li class="fieldcontain">
                         <span id="lastName-label" class="property-label">
@@ -46,16 +56,6 @@
                         </span>
                         <span class="property-value" aria-labelledby="lastName-label">
                             <g:fieldValue bean="${workBookInstance}" field="lastName"/>
-                        </span>
-                    </li>
-                </g:if>
-				<g:if test="${workBookInstance?.email}">
-                    <li class="fieldcontain">
-                        <span id="firstName-label" class="property-label">
-                            <g:message code="workBook.firstName.label"/>
-                        </span>
-                        <span class="property-value" aria-labelledby="firstName-label">
-                            <g:fieldValue bean="${workBookInstance}" field="firstName"/>
                         </span>
                     </li>
                 </g:if>
@@ -69,7 +69,7 @@
                         </span>
                     </li>
                 </g:if>
-                <g:if test="${workBookInstance?.firstName}">
+                <g:if test="${workBookInstance?.email}">
                     <li class="fieldcontain">
                         <span id="email-label" class="property-label">
                             <g:message code="workBook.email.label"/>

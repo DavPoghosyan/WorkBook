@@ -1,6 +1,7 @@
 package com.webbfontaine.training
 
 import org.springframework.security.access.annotation.Secured
+import org.springframework.web.servlet.support.RequestContextUtils as RCU
 
 import static org.springframework.http.HttpStatus.*
 
@@ -90,24 +91,6 @@ class WorkBookController {
 	    redirect action:"index", method:"GET"
     }
 
-    void notFound() {
-	    flash.message = message(
-			    code: 'default.not.found.message',
-			    args:  [WorkBook.class.simpleName, params.id])
-	    redirect action:"index", method:"GET", status: NOT_FOUND
-    }
-
-	void additionalValidation(WorkBook workBook) {
-		boolean isValidAge
-		def customErrorField
-		(isValidAge, customErrorField) = workBookService.isValidBirthDateAndAge(workBook)
-		if (!isValidAge) {
-			def customErrorCode = customErrorField ==
-                    "age" ?  'age.invalid.property' : 'birthDate.invalid.property'
-			def errorMessage = message(code: customErrorCode, args: customErrorField)
-			workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
-		}
-	}
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def exportAsXML(WorkBook workBook){
         xmlProcessingServiceProxy.exportToXML(workBook)
@@ -206,5 +189,32 @@ class WorkBookController {
 		WorkBook workBook = workBookService.xmlToDomain(xmlObject)
         render (template: 'xmlImportViews/editTemp', model:[workBookInstance: workBook, flag: true])
 	}
+
+    void notFound() {
+        flash.message = message(
+                code: 'default.not.found.message',
+                args:  [WorkBook.class.simpleName, params.id])
+        redirect action:"index", method:"GET", status: NOT_FOUND
+    }
+
+    void additionalValidation(WorkBook workBook) {
+        boolean isValidAge
+        def customErrorField
+        (isValidAge, customErrorField) = workBookService.isValidBirthDateAndAge(workBook)
+        if (!isValidAge) {
+            def customErrorCode = customErrorField ==
+                    "age" ?  'age.invalid.property' : 'birthDate.invalid.property'
+            def errorMessage = message(code: customErrorCode, args: customErrorField)
+            workBook.errors.rejectValue(customErrorField, customErrorCode, errorMessage)
+        }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def chLang() {
+        println(params)
+        def newLocale = new Locale(params.id, 'DE')
+        RCU.getLocaleResolver(request).setLocale(request, response, newLocale)
+        return
+    }
 
 }

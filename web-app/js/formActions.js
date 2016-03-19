@@ -1,7 +1,7 @@
 	/*
 ** Created by davit on 2/25/16.
 */
-$(document).ready(function(){
+$().ready(function(){
 	$(".countryDialog").hide("fast")
 	$(".companyDialog").hide("fast")
 	var removeEndDateTxt = ' - Remove End Date'
@@ -12,9 +12,9 @@ $(document).ready(function(){
 		$(".addEndDate").text(removeEndDateTxt)
 	}
 	$(".addEndDate").click(function(){
-		$("#endDate_day").val('')
-		$("#endDate_month").val('')
-		$("#endDate_year").val('')
+		$("#endDate_day").val('').removeClass("invalid").addClass("valid");
+		$("#endDate_month").val('').removeClass("invalid").addClass("valid");
+		$("#endDate_year").val('').removeClass("invalid").addClass("valid");
 		$("#endDate").slideToggle("fast")
 		$(this).text(function(i, v){
 			return v === addEndDateTxt ? removeEndDateTxt : addEndDateTxt

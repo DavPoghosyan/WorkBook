@@ -8,8 +8,10 @@
 		<title>
 			<g:message code="default.list.label" args="[entityName]"/>
         </title>
+		<g:set var="lang" value="${session.'org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE'}"/>
 	</head>
 	<body>
+
 		<a href="#list-workBook" class="skip" tabindex="-1">
             <g:message code="default.link.skip.label" default="Skip to content&hellip;"/>
         </a>

@@ -96,41 +96,6 @@ class WorkPlaceController {
 		redirect action:'index', method:'GET'
 	}
 
-	void notFound() {
-		flash.message = message(
-				code: 'default.not.found.message',
-				args:  [WorkBook.class.simpleName, params.id])
-		redirect action:'index', method:'GET', status: NOT_FOUND
-	}
-
-	void additionalValidation(WorkPlace workPlace) {
-		boolean isValid
-		def  errorCode
-		(isValid, errorCode) = workPlaceService.validate(workPlace)
-		if(!isValid) {
-			def invalidField
-			def errorMessage = message(code: errorCode)
-				invalidField = errorCode.tokenize('.').first()
-			if(invalidField == 'range') {
-				invalidField = workPlace?.endDate ? 'endDate' : 'startDate'
-				errorMessage = message(code: errorCode, args: [workPlace.startDate, workPlace.endDate])
-			}
-			workPlace.errors.rejectValue(invalidField, errorCode, errorMessage)
-		}
-	}
-
-	@Secured(['ROLE_USER','ROLE_ADMIN'])
-	def retrieveCompanyData(long id) {
-		def company =  Company.get(id)
-        render(template:"companyDialog", model:[company: company])
-    }
-
-	@Secured(['ROLE_USER','ROLE_ADMIN'])
-	def retrieveCountryData(long id) {
-        def country =  Country.get(id)
-	    render(template:"countryDialog", model:[country: country])
-    }
-
 	@Secured(['ROLE_ADMIN'])
     def createFromImport(){
         def xmlObject = xmlProcessingServiceProxy.xmlObject
@@ -156,5 +121,40 @@ class WorkPlaceController {
                 args:  [WorkPlace.class.simpleName, workPlace.id])
         render(template: 'showTemp', model:[workPlaceInstance: workPlace], status: OK)
     }
+
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def retrieveCompanyData(long id) {
+        def company =  Company.get(id)
+        render(template:"companyDialog", model:[company: company])
+    }
+
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def retrieveCountryData(long id) {
+        def country =  Country.get(id)
+        render(template:"countryDialog", model:[country: country])
+    }
+
+	void notFound() {
+		flash.message = message(
+				code: 'default.not.found.message',
+				args:  [WorkBook.class.simpleName, params.id])
+		redirect action:'index', method:'GET', status: NOT_FOUND
+	}
+
+	void additionalValidation(WorkPlace workPlace) {
+		boolean isValid
+		def  errorCode
+		(isValid, errorCode) = workPlaceService.validate(workPlace)
+		if(!isValid) {
+			def invalidField
+			def errorMessage = message(code: errorCode)
+			invalidField = errorCode.tokenize('.').first()
+			if(invalidField == 'range') {
+				invalidField = workPlace?.endDate ? 'endDate' : 'startDate'
+				errorMessage = message(code: errorCode, args: [workPlace.startDate, workPlace.endDate])
+			}
+			workPlace.errors.rejectValue(invalidField, errorCode, errorMessage)
+		}
+	}
 
 }

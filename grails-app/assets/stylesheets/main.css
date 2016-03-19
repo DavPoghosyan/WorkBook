@@ -295,7 +295,7 @@ input:focus, select:focus, textarea:focus {
 	        box-shadow: 0 0 0.5em #ffffff;
 }
 
-.required-indicator {
+.required-indicator, .common-indicator {
 	color: #48802C;
 	display: inline-block;
 	font-weight: bold;
@@ -619,3 +619,19 @@ a.skip {
     background-color: #ffffff;
 }
 
+#age {
+	width: 35px;
+}
+
+.activeLang {
+	color: #196532;
+}
+
+.inActiveLang {
+	color: rgba(127, 230, 124, 0.98);
+}
+
+#locale-selector {
+	display: inline-block;
+	margin-left: 80%;
+}

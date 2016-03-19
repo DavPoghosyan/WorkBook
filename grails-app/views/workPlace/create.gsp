@@ -42,7 +42,7 @@
                     </g:eachError>
                 </ul>
 			</g:hasErrors>
-			<g:form url="[resource:workPlaceInstance, action:'save']">
+			<g:form id="wp" url="[resource:workPlaceInstance, action:'save']">
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

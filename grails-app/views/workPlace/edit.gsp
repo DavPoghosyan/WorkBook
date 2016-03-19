@@ -54,7 +54,7 @@
                     </g:eachError>
                 </ul>
 			</g:hasErrors>
-			<g:form url="[resource:workPlaceInstance, action:'update']" method="PUT" >
+			<g:form id="wp" url="[resource:workPlaceInstance, action:'update']" method="PUT" >
 				<g:hiddenField name="version" value="${workPlaceInstance?.version}" />
                 <fieldset class="form">
                     <g:render template="form"/>

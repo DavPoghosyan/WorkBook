@@ -52,7 +52,7 @@
 					</g:eachError>
 				</ul>
 			</g:hasErrors>
-			    <g:form url="[resource:workBookInstance, action:'update']" method="PUT" >
+			    <g:form id="wb" url="[resource:workBookInstance, action:'update']" method="PUT" >
 				    <g:hiddenField name="version" value="${workBookInstance?.version}" />
 				    <fieldset class="form">
 					    <g:render template="form"/>

@@ -36,7 +36,7 @@
 			<div class="message" id="perm-message" role="status">
             	<g:message code="import.workbook.label" args="${workBookInstance}"/>
            	</div>
-            <g:if test="${id}">
+            <g:if test="${WorkBook.get(id)}">
                 <div class="message" id="perm-message" role="status">
 	                <g:message code="import.owner.exists"/>
 	                <g:remoteLink action="createFromImport" update="main-content">
