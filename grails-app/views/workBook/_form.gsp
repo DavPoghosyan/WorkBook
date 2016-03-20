@@ -1,8 +1,8 @@
 <%@ page import="com.webbfontaine.training.WorkBook" %>
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'validation.css')}" type="text/css">
-%{--<g:javascript src="jquery.validate.js"/>
-<g:javascript src="workBookFormValidation.js"/>--}%
-<g:javascript src="workBookValidation.js"/>
+<g:javascript src="jquery.validate.js"/>
+<g:javascript src="workBookFormValidation.js"/>
+%{--<g:javascript src="workBookValidation.js"/>--}%
 <g:javascript src="ageCalculate.js"/>
 <g:set var="today" value="${new Date()}"/>
 <g:set var="minYear" value="${today[Calendar.YEAR]-65}"/>
@@ -67,6 +67,6 @@
         <span class="common-indicator">:</span>
     </label>
     <g:field name="age" type="number" value="${workBookInstance?.age}"
-             min="18" max="65" />
+             min="18" max="65" readonly="true"/>
 </div>
 

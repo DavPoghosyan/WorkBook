@@ -1,7 +1,7 @@
 package com.webbfontaine.training
 
-import am.webbfontaine.training.rimm.Company
-import am.webbfontaine.training.rimm.Country
+import rimm.Company
+import rimm.Country
 
 class WorkPlace {
 
